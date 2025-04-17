@@ -35,26 +35,27 @@
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
-        (function() {
-            emailjs.init({
-              publicKey: "vnFgL1hczpe90qMvK",
-            });
-        })();
-    </script>
-    <script type="text/javascript">
-        window.onload = function() {
-            document.getElementById('contactForm').addEventListener('submit', function(event) {
-                event.preventDefault();
-                // these IDs from the previous steps
-                emailjs.sendForm('contact_service', 'contact_form', this)
-                    .then(() => {
-                        console.log('SUCCESS!');
-                    }, (error) => {
-                        console.log('FAILED...', error);
-                    });
-            });
-        }
-    </script>
+    (function() {
+        emailjs.init("vnFgL1hczpe90qMvK"); // Replace with your actual public key
+    })();
+
+    window.onload = function() {
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Send form data using EmailJS
+            emailjs.sendForm('service_zs3z519', 'template_6m73gxq', this)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    alert('Your message has been sent successfully!');
+                    document.getElementById('contactForm').reset(); // Reset the form after submission
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    alert('Failed to send your message. Please try again later.');
+                });
+        });
+    }
+</script>
 </head>
 
 <body>
@@ -121,7 +122,7 @@
                                 <input type="email" name="email" id="email" class="form-control bg-light border-0 px-4" placeholder="Your Email" style="height: 55px;" required>
                             </div>
                             <div class="col-12">
-                                <input type="text" name="subject" id="subject" class="form-control bg-light border-0 px-4" placeholder="Subject" style="height: 55px;" required>
+                                <input type="text" name="subject" id="subject" class="form-control bg-light border-0 px-4" maxlength="50" placeholder="Subject" style="height: 55px;" required>
                             </div>
                             <div class="col-12">
                                 <textarea name="message" id="message" class="form-control bg-light border-0 px-4 py-3" rows="8" placeholder="Message" required></textarea>
