@@ -483,10 +483,6 @@
     border-radius: 5px;
 }
 
-.product-item img {
-    max-height: 150px;
-    object-fit: cover;
-}
 
 
 /* Product Card Styling */
