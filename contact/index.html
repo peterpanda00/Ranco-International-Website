@@ -3,9 +3,16 @@
 
 <head>
     <meta charset="utf-8">
-    <title>RANCO</title>
+    <title>RANCO General Merchandise International Group Ltd.    </title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <!-- Meta Description -->
+    <meta name="description" content="Ranco General Merchandise International Group Ltd. offers high-quality, affordable household and personal care products. From skincare to household essentials, we bring comfort and convenience to your home.">
 
+    <!-- Meta Keywords -->
+    <meta name="keywords" content="Ranco, household products, personal care, affordable products, quality products, skincare, dishwashing liquid, facial tissue, laundry detergent">
+
+    <!-- Meta Author -->
+    <meta name="author" content="RANCO General Merchandise International Group Ltd.">
 
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -24,6 +31,7 @@
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    
 </head>
 
 <body>
@@ -81,19 +89,19 @@
             </div>
             <div class="row g-5">
                 <div class="col-lg-7">
-                    <form>
+                    <form id="contactForm">
                         <div class="row g-3">
                             <div class="col-12">
-                                <input type="text" class="form-control bg-light border-0 px-4" placeholder="Your Name" style="height: 55px;">
+                                <input type="text" id="name" class="form-control bg-light border-0 px-4" placeholder="Your Name" style="height: 55px;" required>
                             </div>
                             <div class="col-12">
-                                <input type="email" class="form-control bg-light border-0 px-4" placeholder="Your Email" style="height: 55px;">
+                                <input type="email" id="email" class="form-control bg-light border-0 px-4" placeholder="Your Email" style="height: 55px;" required>
                             </div>
                             <div class="col-12">
-                                <input type="text" class="form-control bg-light border-0 px-4" placeholder="Subject" style="height: 55px;">
+                                <input type="text" id="subject" class="form-control bg-light border-0 px-4" placeholder="Subject" style="height: 55px;" required>
                             </div>
                             <div class="col-12">
-                                <textarea class="form-control bg-light border-0 px-4 py-3" rows="8" placeholder="Message"></textarea>
+                                <textarea id="message" class="form-control bg-light border-0 px-4 py-3" rows="8" placeholder="Message" required></textarea>
                             </div>
                             <div class="col-12">
                                 <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
@@ -182,9 +190,41 @@
     <script src="lib/easing/easing.min.js"></script>
     <script src="lib/waypoints/waypoints.min.js"></script>
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    <script>
+        // Initialize EmailJS with your user ID
+        emailjs.init("YOUR_USER_ID"); // Replace "YOUR_USER_ID" with your EmailJS user ID
+    
+        // Handle form submission
+        document.getElementById("contactForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent default form submission
+    
+            // Collect form data
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const subject = document.getElementById("subject").value;
+            const message = document.getElementById("message").value;
+    
+            // Send email using EmailJS
+            emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+                from_name: name,
+                from_email: email,
+                subject: subject,
+                message: message,
+            }).then(
+                function (response) {
+                    alert("Message sent successfully!");
+                    document.getElementById("contactForm").reset(); // Reset the form
+                },
+                function (error) {
+                    alert("Failed to send message. Please try again later.");
+                }
+            );
+        });
+    </script>
 </body>
 
 </html>
